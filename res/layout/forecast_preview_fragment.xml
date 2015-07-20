@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:gravity="bottom">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:background="@android:color/holo_blue_light"
+            android:padding="5dp">
+        <TextView
+                android:text="Mon 18.07"
+                android:id="@+id/date" style="@style/preview_text"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="day +15"
+                android:id="@+id/MAX_TEMPERATURE" android:layout_gravity="left" style="@style/preview_text"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="night +15"
+                  android:id="@+id/MIN_TEMPERATURE" android:layout_gravity="left" style="@style/preview_text"/>
+    </LinearLayout>
+</FrameLayout>
