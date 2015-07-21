@@ -1,49 +1,127 @@
 package com.d2112.weather.model;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class Forecast implements Parcelable {
+    private Map<TimeOfDay, Temperature> temperatureByTimeOfDay;
     private Date date;
-    private List<Temperature> temperatures;
+    private Wind wind;
+    private int humidity; //0-100%
+    private String iconCode;
 
-    public Forecast(Date date, List<Temperature> temperatures) {
-        this.date = date;
-    }
-
-    private Forecast(Parcel in) {
-        date = new Date(in.readLong());
-        temperatures = new ArrayList<>();
-        temperatures = in.createTypedArrayList(Temperature.CREATOR);
+    private Forecast() {
+        temperatureByTimeOfDay = new HashMap<>();
     }
 
     public Date getDate() {
         return date;
     }
 
-    public Temperature getMaxTemperature() {
-        return new Temperature(99);
+    public Wind getWind() {
+        return wind;
     }
 
-    public Temperature getMinTemperature() {
-        return new Temperature(-99);
+    public int getHumidity() {
+        return humidity;
+    }
+
+    public Temperature getTemperature(TimeOfDay timeOfDay) {
+        return temperatureByTimeOfDay.get(timeOfDay);
+    }
+
+    public enum TimeOfDay {
+        MORNING, DAY, EVENING, NIGHT
+    }
+
+    /*----BUILDER----*/
+
+    public static Builder newBuilder() {
+        return new Forecast().new Builder();
+    }
+
+    public class Builder {
+
+        private Builder() {
+        }
+
+        public Builder setDate(Date date) {
+            Forecast.this.date = date;
+            return this;
+        }
+
+        public Builder setHumidity(int humidity) {
+            Forecast.this.humidity = humidity;
+            return this;
+        }
+
+        public Builder setWind(Wind wind) {
+            Forecast.this.wind = wind;
+            return this;
+        }
+
+        public Builder setIconCode(String iconCode) {
+            Forecast.this.iconCode = iconCode;
+            return this;
+        }
+
+        public Builder setTemperature(TimeOfDay timeOfDay, Temperature temperature) {
+            temperatureByTimeOfDay.put(timeOfDay, temperature);
+            return this;
+        }
+
+        public Forecast build() {
+            return Forecast.this;
+        }
+    }
+
+    /*----PARCELABLE STUFF----*/
+    private static final String MAP_SIZE_ATTRIBUTE_NAME = "size";
+    private static final String MAP_KEY_ATTRIBUTE_NAME = "key";
+    private static final String MAP_VALUE_ATTRIBUTE_NAME = "value";
+
+    private Forecast(Parcel in) {
+        date = new Date(in.readLong());
+        wind = in.readParcelable(Wind.class.getClassLoader());
+        humidity = in.readInt();
+        iconCode = in.readString();
+
+        //reading map from bundle
+        Bundle bundle = in.readBundle();
+        int mapSize = bundle.getInt(MAP_SIZE_ATTRIBUTE_NAME);
+        String mapKey = bundle.getString(MAP_KEY_ATTRIBUTE_NAME);
+        Temperature mapValue = bundle.getParcelable(MAP_VALUE_ATTRIBUTE_NAME);
+        temperatureByTimeOfDay = new HashMap<>();
+        for (int i = 0; i < mapSize; i++) {
+            temperatureByTimeOfDay.put(TimeOfDay.valueOf(mapKey), mapValue);
+        }
+    }
+
+    @Override
+    public void writeToParcel(Parcel out, int parcelableFlags) {
+        out.writeLong(date.getTime());
+        out.writeInt(humidity);
+        out.writeParcelable(wind, parcelableFlags);
+        out.writeString(iconCode);
+
+        //write bundle with values from map to parcel
+        Bundle bundle = new Bundle();
+        bundle.putInt(MAP_SIZE_ATTRIBUTE_NAME, temperatureByTimeOfDay.size());
+        for (Map.Entry<TimeOfDay, Temperature> entry : temperatureByTimeOfDay.entrySet()) {
+            bundle.putString(MAP_KEY_ATTRIBUTE_NAME, entry.getKey().name());
+            bundle.putParcelable(MAP_VALUE_ATTRIBUTE_NAME, entry.getValue());
+        }
+        out.writeBundle(bundle);
     }
 
     @Override
     public int describeContents() {
         return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        for (Temperature temperature : temperatures) {
-            parcel.writeParcelable(temperature, i);
-        }
-        parcel.writeLong(date.getTime());
     }
 
     public static final Parcelable.Creator<Forecast> CREATOR = new Parcelable.Creator<Forecast>() {

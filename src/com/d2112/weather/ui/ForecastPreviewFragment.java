@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.d2112.weather.R;
 import com.d2112.weather.model.Forecast;
-import com.d2112.weather.model.Temperature;
 
 import java.text.DateFormat;
 
@@ -25,10 +24,10 @@ public class ForecastPreviewFragment extends Fragment {
         TextView minTemperatureView = (TextView) view.findViewById(R.id.MIN_TEMPERATURE);
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getActivity().getApplicationContext());
         date.setText(dateFormat.format(forecast.getDate()));
-        Temperature maxTemperature = forecast.getMaxTemperature();
+/*        Temperature maxTemperature = forecast.getMaxTemperature();
         Temperature minTemperature = forecast.getMinTemperature();
         maxTemperatureView.setText(String.valueOf(maxTemperature.getAsCelsius()));
-        minTemperatureView.setText(String.valueOf(minTemperature.getAsCelsius()));
+        minTemperatureView.setText(String.valueOf(minTemperature.getAsCelsius()));*/
         return view;
     }
 }

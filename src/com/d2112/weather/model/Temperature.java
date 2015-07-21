@@ -4,10 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Temperature implements Parcelable {
-    private int celsius;
-    private int kelvin;
+    private double celsius;
+    private double kelvin;
 
-    public Temperature(int celsius) {
+    public Temperature(double celsius) {
         this.celsius = celsius;
     }
 
@@ -15,7 +15,7 @@ public class Temperature implements Parcelable {
         celsius = in.readInt();
     }
 
-    public int getAsCelsius() {
+    public double getAsCelsius() {
         return celsius;
     }
 
@@ -26,7 +26,7 @@ public class Temperature implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeInt(celsius);
+        parcel.writeDouble(celsius);
     }
 
     public static final Parcelable.Creator<Temperature> CREATOR = new Parcelable.Creator<Temperature>() {

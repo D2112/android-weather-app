@@ -27,7 +27,7 @@ public class ForecastActivity extends Activity {
         Intent intent = getIntent();
         String cityName = intent.getStringExtra("cityName");
 
-        List<Forecast> forecastList = weatherService.getForecastForFewWeeks();
+        List<Forecast> forecastList = weatherService.getWeekForecast(cityName);
 
         //render forecast preview fragments within a transaction
         FragmentTransaction ft = getFragmentManager().beginTransaction();

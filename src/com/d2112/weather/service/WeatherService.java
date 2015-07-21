@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface WeatherService {
 
-    List<Forecast> getForecastForFewWeeks();
+    List<Forecast> getWeekForecast(String cityName);
 }
