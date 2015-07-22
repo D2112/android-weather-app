@@ -1,12 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
-              android:layout_height="fill_parent" android:orientation="horizontal">
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" android:stretchColumns="*" android:background="@android:color/white">
 
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:background="#534155af">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Karaganda"
+                android:id="@+id/textView2" android:layout_margin="10dp" android:textSize="24dp"/>
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="sky is clear"
+                  android:id="@+id/textView3" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Morning: "
+                  android:id="@+id/textView4" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Day: "
+                  android:id="@+id/textView5" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Evening: "
+                  android:id="@+id/textView6" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Night: "
+                  android:id="@+id/textView7" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Wind: "
+                  android:id="@+id/textView8" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" style="@style/forecast_info_row">
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Humidity: "
+                  android:id="@+id/textView9" android:layout_margin="10dp" android:textSize="24dp"/>
+    </TableRow>
     <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/horizontalScrollView" android:layout_gravity="bottom">
+            android:id="@+id/horizontalScrollView" android:layout_gravity="bottom"
+            >
         <LinearLayout
                 android:id="@+id/forecastPreviewContainer"
                 android:orientation="horizontal"
@@ -14,6 +69,6 @@
                 android:layout_height="fill_parent">
         </LinearLayout>
     </HorizontalScrollView>
-</LinearLayout>
+</TableLayout>
 
 

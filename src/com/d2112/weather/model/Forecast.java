@@ -14,6 +14,8 @@ public class Forecast implements Parcelable {
     private Wind wind;
     private int humidity; //0-100%
     private String iconCode;
+    private String cityName;
+    private String description;
 
     private Forecast() {
         temperatureByTimeOfDay = new HashMap<>();
@@ -29,6 +31,18 @@ public class Forecast implements Parcelable {
 
     public int getHumidity() {
         return humidity;
+    }
+
+    public String getIconCode() {
+        return iconCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getCityName() {
+        return cityName;
     }
 
     public Temperature getTemperature(TimeOfDay timeOfDay) {
@@ -60,6 +74,16 @@ public class Forecast implements Parcelable {
             return this;
         }
 
+        public Builder setCityName(String cityName) {
+            Forecast.this.cityName = cityName;
+            return this;
+        }
+
+        public Builder setDescription(String description) {
+            Forecast.this.description = description;
+            return this;
+        }
+
         public Builder setWind(Wind wind) {
             Forecast.this.wind = wind;
             return this;
@@ -87,9 +111,11 @@ public class Forecast implements Parcelable {
 
     private Forecast(Parcel in) {
         date = new Date(in.readLong());
-        wind = in.readParcelable(Wind.class.getClassLoader());
         humidity = in.readInt();
         iconCode = in.readString();
+        cityName = in.readString();
+        description = in.readString();
+        wind = in.readParcelable(Wind.class.getClassLoader());
 
         //reading map from bundle
         Bundle bundle = in.readBundle();
@@ -106,10 +132,12 @@ public class Forecast implements Parcelable {
     public void writeToParcel(Parcel out, int parcelableFlags) {
         out.writeLong(date.getTime());
         out.writeInt(humidity);
-        out.writeParcelable(wind, parcelableFlags);
         out.writeString(iconCode);
+        out.writeString(cityName);
+        out.writeString(description);
+        out.writeParcelable(wind, parcelableFlags);
 
-        //write bundle with values from map to parcel
+        //write map values to bundle and write bundle to parcel
         Bundle bundle = new Bundle();
         bundle.putInt(MAP_SIZE_ATTRIBUTE_NAME, temperatureByTimeOfDay.size());
         for (Map.Entry<TimeOfDay, Temperature> entry : temperatureByTimeOfDay.entrySet()) {

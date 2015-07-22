@@ -2,22 +2,44 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent" android:gravity="bottom">
+             android:layout_height="match_parent" android:paddingEnd="1dp">
 
-    <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:background="@android:color/holo_blue_light"
-            android:padding="5dp">
-        <TextView
-                android:text="Mon 18.07"
-                android:id="@+id/date" style="@style/preview_text"/>
-        <TextView
+    <TableLayout
+            android:layout_width="75dp"
+            android:layout_height="wrap_content" android:layout_gravity="center"
+            android:stretchColumns="*" android:background="#aa30414c">
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mon 22/07"
+                    android:id="@+id/date" android:layout_gravity="center_horizontal" android:layout_span="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/icon"
+                    android:layout_span="2" android:layout_gravity="center_horizontal" android:scaleType="fitXY"
+                    android:src="@drawable/icon01d" android:adjustViewBounds="false"/>
+        </TableRow>
+        <TableRow
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="day +15"
-                android:id="@+id/MAX_TEMPERATURE" android:layout_gravity="left" style="@style/preview_text"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="night +15"
-                  android:id="@+id/MIN_TEMPERATURE" android:layout_gravity="left" style="@style/preview_text"/>
-    </LinearLayout>
+                android:layout_height="wrap_content">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+10"
+                    android:id="@+id/nightTemperature" android:layout_gravity="center_horizontal"/>
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+15"
+                    android:id="@+id/dayTemperature" android:layout_gravity="center_horizontal"/>
+        </TableRow>
+    </TableLayout>
 </FrameLayout>

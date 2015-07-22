@@ -29,7 +29,7 @@ public class ForecastActivity extends Activity {
 
         List<Forecast> forecastList = weatherService.getWeekForecast(cityName);
 
-        //render forecast preview fragments within a transaction
+        //render forecast preview fragments
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         for (Forecast forecast : forecastList) {
             Fragment forecastPreview = new ForecastPreviewFragment();
