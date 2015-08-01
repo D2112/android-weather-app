@@ -16,7 +16,7 @@ import com.d2112.weather.WeatherApplication;
 import com.d2112.weather.WeatherValuesFormatter;
 import com.d2112.weather.model.Forecast;
 import com.d2112.weather.model.Temperature;
-import com.d2112.weather.service.WeatherService;
+import com.d2112.weather.service.WeatherIntentService;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -92,8 +92,8 @@ public class ForecastActivity extends Activity {
     }
 
     private void sendCallForWeekForecast(Intent dataForService) {
-        dataForService.setClass(getBaseContext(), WeatherService.class);
-        dataForService.setFlags(WeatherService.GET_WEEK_FORECAST_ACTION);
+        dataForService.setClass(getBaseContext(), WeatherIntentService.class);
+        dataForService.setFlags(WeatherIntentService.GET_WEEK_FORECAST_ACTION);
         dataForService.putExtra(WeatherApplication.RESULT_RECEIVER_ARG_NAME, new ForecastReceiver(new Handler()));
         startService(dataForService);
     }

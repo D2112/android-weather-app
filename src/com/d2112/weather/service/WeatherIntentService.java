@@ -29,9 +29,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
-public class WeatherService extends IntentService {
+public class WeatherIntentService extends IntentService {
     public static final int GET_WEEK_FORECAST_ACTION = 1;
-    private static final String TAG = WeatherService.class.getSimpleName();
+    private static final String TAG = WeatherIntentService.class.getSimpleName();
     private static final String APPID_PARAMETER = "&APPID=6b01766ea5092223106066a52a9cc3ea";
     private static final int UNIX_TIME_TO_MILLISECONDS_MULTIPLIER = 1000;
     private static final String FORECAST_FOR_WEEK_BY_CITY_NAME_URL = "http://api.openweathermap.org/data/2.5/forecast/daily?units=metric&q=";
@@ -42,7 +42,7 @@ public class WeatherService extends IntentService {
 
     private Gson gson;
 
-    public WeatherService() {
+    public WeatherIntentService() {
         super("Weather Service");
         gson = new Gson();
     }
