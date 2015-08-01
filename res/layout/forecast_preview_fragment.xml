@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-             android:layout_height="match_parent" android:paddingEnd="1dp">
-
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/previewFragment" android:focusableInTouchMode="true"
+             android:background="@drawable/forecast_preview_background">
     <TableLayout
-            android:layout_width="75dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content" android:layout_gravity="center"
-            android:stretchColumns="*" android:background="#aa30414c">
+            android:stretchColumns="*"
+            android:duplicateParentState="true"
+            android:focusable="false" android:focusableInTouchMode="false">
         <TableRow
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent">
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mon 22/07"
-                    android:id="@+id/date" android:layout_gravity="center_horizontal" android:layout_span="2"/>
+                    android:id="@+id/previewDate" android:layout_gravity="center_horizontal" android:layout_span="2"
+                    style="@style/preview_text"/>
         </TableRow>
-        <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TableRow android:layout_width="fill_parent" android:layout_height="fill_parent">
             <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
                     android:id="@+id/icon"
-                    android:layout_span="2" android:layout_gravity="center_horizontal" android:scaleType="fitXY"
-                    android:src="@drawable/icon01d" android:adjustViewBounds="false"/>
+                    android:adjustViewBounds="false"
+                    android:cropToPadding="false"
+                    android:layout_span="2"/>
         </TableRow>
         <TableRow
                 android:layout_width="wrap_content"
@@ -33,13 +35,13 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+10"
-                    android:id="@+id/nightTemperature" android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/nightTemperature" android:layout_gravity="center_horizontal"
+                    style="@style/preview_text"/>
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="+15"
-                    android:id="@+id/dayTemperature" android:layout_gravity="center_horizontal"/>
+                    android:id="@+id/dayTemperature" android:layout_gravity="center_horizontal"
+                    style="@style/preview_text"/>
         </TableRow>
     </TableLayout>
 </FrameLayout>

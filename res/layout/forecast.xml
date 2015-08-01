@@ -1,74 +1,196 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:orientation="vertical"
              android:layout_width="fill_parent"
-             android:layout_height="fill_parent" android:stretchColumns="*" android:background="@android:color/white">
-
+             android:layout_height="fill_parent"
+             android:stretchColumns="*"
+             android:background="@drawable/drops">
     <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" android:background="#534155af">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
         <TextView
-                android:layout_width="wrap_content"
+                android:id="@+id/cityNameValue"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Karaganda"
-                android:id="@+id/textView2" android:layout_margin="10dp" android:textSize="24dp"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="sky is clear"
-                  android:id="@+id/textView3" android:layout_margin="10dp" android:textSize="24dp"/>
+                android:textSize="24sp"
+                android:layout_span="2" android:clickable="true" android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp" android:textColor="@android:color/white" android:layout_weight="2"/>
+        <Button
+                style="?android:attr/buttonStyleSmall"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:text="@string/change_city_button"
+                android:id="@+id/changeCityButton" android:layout_gravity="center" android:textSize="12sp"
+                android:layout_weight="1"/>
     </TableRow>
     <TableRow
-            style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Morning: "
-                  android:id="@+id/textView4" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Day: "
-                  android:id="@+id/textView5" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Evening: "
-                  android:id="@+id/textView6" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Night: "
-                  android:id="@+id/textView7" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Wind: "
-                  android:id="@+id/textView8" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent" style="@style/forecast_info_row">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium" android:text="Humidity: "
-                  android:id="@+id/textView9" android:layout_margin="10dp" android:textSize="24dp"/>
-    </TableRow>
-    <HorizontalScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/horizontalScrollView" android:layout_gravity="bottom"
+            android:layout_height="match_parent" android:layout_marginBottom="5dp">
+        <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:id="@+id/date" android:layout_gravity="left"
+                  android:layout_marginLeft="10dp" android:layout_span="2"/>
+    </TableRow>
+    <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:layout_marginBottom="1dp">
+        <ImageView
+                android:id="@+id/weatherIcon"
+                android:layout_width="0dp"
+                android:layout_height="25dp"
+                android:layout_weight="1"/>
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/weatherDescription" android:layout_gravity="center|right" android:layout_weight="7"
+                />
+    </TableRow>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             >
-        <LinearLayout
-                android:id="@+id/forecastPreviewContainer"
-                android:orientation="horizontal"
+        <ScrollView
+                android:id="@+id/scrollView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                >
+            <TableLayout android:layout_width="wrap_content"
+                         android:layout_height="wrap_content" android:stretchColumns="*">
+
+                <TableRow
+                        style="@style/forecast_info_row">
+                    <TextView
+                            android:text="@string/morning"
+                            android:id="@+id/morning"
+                            style="@style/forecast_info_cell" android:layout_width="0dp"/>
+                    <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:id="@+id/morningValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" style="@style/forecast_info_row"
+                        >
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/day"
+                              android:id="@+id/day"
+                              style="@style/forecast_info_cell"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/dayValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" style="@style/forecast_info_row"
+                        >
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/evening"
+                              android:id="@+id/evening"
+                              style="@style/forecast_info_cell"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/eveningValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" style="@style/forecast_info_row"
+                        >
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium" android:text="@string/night"
+                              android:id="@+id/night"
+                              style="@style/forecast_info_cell"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/nightValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" style="@style/forecast_info_row"
+                        >
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:text="@string/wind_speed"
+                              android:id="@+id/windSpeed"
+                              style="@style/forecast_info_cell"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/windSpeedValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+                <TableRow style="@style/forecast_info_row" android:layout_width="fill_parent"
+                          android:layout_height="fill_parent">
+                    <TextView style="@style/forecast_info_cell" android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:text="@string/wind_degree"
+                              android:id="@+id/windDegree"/>
+                    <TextView style="@style/forecast_info_cell" android:layout_width="0dp"
+                              android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/windDegreeValue"/>
+                </TableRow>
+                <TableRow
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent" style="@style/forecast_info_row"
+                        >
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:text="@string/humidity"
+                              android:id="@+id/humidity"
+                              style="@style/forecast_info_cell"/>
+                    <TextView android:layout_width="0dp" android:layout_height="wrap_content"
+                              android:textAppearance="?android:attr/textAppearanceMedium"
+                              android:id="@+id/humidityValue" style="@style/forecast_info_cell"/>
+                </TableRow>
+
+            </TableLayout>
+        </ScrollView>
+        <HorizontalScrollView
+                android:id="@+id/horizontalScrollView"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent">
-        </LinearLayout>
-    </HorizontalScrollView>
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                >
+            <LinearLayout
+                    android:id="@+id/forecastPreviewContainer"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent" android:gravity="bottom">
+
+                <!--                <fragment
+                                        android:name="com.d2112.weather.ui.ForecastPreviewFragment"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1" tools:layout="@layout/forecast_preview_fragment">
+                                </fragment>
+                                <fragment
+                                        android:name="com.d2112.weather.ui.ForecastPreviewFragment"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1" tools:layout="@layout/forecast_preview_fragment">
+                                </fragment>
+                                <fragment
+                                        android:name="com.d2112.weather.ui.ForecastPreviewFragment"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1" tools:layout="@layout/forecast_preview_fragment">
+                                </fragment>
+                                <fragment
+                                        android:name="com.d2112.weather.ui.ForecastPreviewFragment"
+                                        android:layout_width="0dp"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1" tools:layout="@layout/forecast_preview_fragment">
+                                </fragment>-->
+
+            </LinearLayout>
+        </HorizontalScrollView>
+    </LinearLayout>
 </TableLayout>
 
 

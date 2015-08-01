@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ViewFlipper xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:id="@+id/selecting_city_flipper"
+             android:outAnimation="@android:anim/slide_out_right">
+    <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:weightSum="1" android:background="@drawable/sky" android:stretchColumns="*">
+
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_marginTop="100dp" android:layout_marginBottom="50dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/select_country"
+                    android:id="@+id/textView" android:textSize="32sp"
+                    android:textColor="@android:color/white"
+                    android:layout_span="2"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:background="@android:color/white"
+                android:layout_marginLeft="10dp" android:layout_marginRight="10dp">
+            <EditText
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:id="@+id/cityNameInput"
+                    android:textColor="@android:color/black"
+                    android:textSize="28sp"
+                    android:inputType="text" android:paddingLeft="5dp"
+                    android:layout_weight="6" android:background="@android:color/white"
+                    android:paddingRight="5dp"/>
+            <Button
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:text="@string/gps_button"
+                    android:id="@+id/gpsButton"
+                    android:background="@drawable/gps_button" android:textColor="@android:color/white"
+                    android:layout_weight="1" android:layout_gravity="center" android:textSize="12sp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" android:layout_marginTop="10dp">
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:id="@+id/messageOutput"
+                    android:textSize="20dp" android:layout_span="2"
+                    android:paddingLeft="10dp" android:paddingRight="10dp"
+                    android:layout_gravity="center" android:textAlignment="center"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ok_button"
+                    android:id="@+id/okButton"
+                    android:layout_span="2" android:layout_marginLeft="75dp" android:layout_marginRight="75dp"
+                    android:layout_marginTop="20dp"/>
+        </TableRow>
+        <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="bottom" android:layout_weight="1">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_city_from_list"
+                    android:id="@+id/chooseCityFromListButton" android:layout_span="2"
+                    android:textSize="18sp" android:layout_gravity="bottom"/>
+        </TableRow>
+    </TableLayout>
+    <ExpandableListView android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:id="@+id/cityList" android:layout_gravity="center_horizontal"/>
+</ViewFlipper>
+
+

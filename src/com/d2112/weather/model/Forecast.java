@@ -1,6 +1,5 @@
 package com.d2112.weather.model;
 
-import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -51,6 +50,49 @@ public class Forecast implements Parcelable {
 
     public enum TimeOfDay {
         MORNING, DAY, EVENING, NIGHT
+    }
+
+    @Override
+    public String toString() {
+        return "Forecast{" +
+                "temperatureByTimeOfDay=" + temperatureByTimeOfDay +
+                ", date=" + date +
+                ", wind=" + wind +
+                ", humidity=" + humidity +
+                ", iconCode='" + iconCode + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Forecast forecast = (Forecast) o;
+
+        if (humidity != forecast.humidity) return false;
+        if (temperatureByTimeOfDay != null ? !temperatureByTimeOfDay.equals(forecast.temperatureByTimeOfDay) : forecast.temperatureByTimeOfDay != null)
+            return false;
+        if (date != null ? !date.equals(forecast.date) : forecast.date != null) return false;
+        if (wind != null ? !wind.equals(forecast.wind) : forecast.wind != null) return false;
+        if (iconCode != null ? !iconCode.equals(forecast.iconCode) : forecast.iconCode != null) return false;
+        if (cityName != null ? !cityName.equals(forecast.cityName) : forecast.cityName != null) return false;
+        return !(description != null ? !description.equals(forecast.description) : forecast.description != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = temperatureByTimeOfDay != null ? temperatureByTimeOfDay.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (wind != null ? wind.hashCode() : 0);
+        result = 31 * result + humidity;
+        result = 31 * result + (iconCode != null ? iconCode.hashCode() : 0);
+        result = 31 * result + (cityName != null ? cityName.hashCode() : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 
     /*----BUILDER----*/
@@ -117,14 +159,11 @@ public class Forecast implements Parcelable {
         description = in.readString();
         wind = in.readParcelable(Wind.class.getClassLoader());
 
-        //reading map from bundle
-        Bundle bundle = in.readBundle();
-        int mapSize = bundle.getInt(MAP_SIZE_ATTRIBUTE_NAME);
-        String mapKey = bundle.getString(MAP_KEY_ATTRIBUTE_NAME);
-        Temperature mapValue = bundle.getParcelable(MAP_VALUE_ATTRIBUTE_NAME);
+        //filling map
         temperatureByTimeOfDay = new HashMap<>();
-        for (int i = 0; i < mapSize; i++) {
-            temperatureByTimeOfDay.put(TimeOfDay.valueOf(mapKey), mapValue);
+        for (TimeOfDay mapKey : TimeOfDay.values()) {
+            Temperature mapValue = in.readParcelable(Temperature.class.getClassLoader());
+            temperatureByTimeOfDay.put(mapKey, mapValue);
         }
     }
 
@@ -137,14 +176,9 @@ public class Forecast implements Parcelable {
         out.writeString(description);
         out.writeParcelable(wind, parcelableFlags);
 
-        //write map values to bundle and write bundle to parcel
-        Bundle bundle = new Bundle();
-        bundle.putInt(MAP_SIZE_ATTRIBUTE_NAME, temperatureByTimeOfDay.size());
-        for (Map.Entry<TimeOfDay, Temperature> entry : temperatureByTimeOfDay.entrySet()) {
-            bundle.putString(MAP_KEY_ATTRIBUTE_NAME, entry.getKey().name());
-            bundle.putParcelable(MAP_VALUE_ATTRIBUTE_NAME, entry.getValue());
+        for (TimeOfDay timeOfDay : TimeOfDay.values()) {
+            out.writeParcelable(temperatureByTimeOfDay.get(timeOfDay), parcelableFlags);
         }
-        out.writeBundle(bundle);
     }
 
     @Override

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="preview">#aa000000</color>
+    <color name="preview_border">#96555555</color>
+    <color name="preview_highlight_color">#41555555</color>
+    <color name="cell_background">#4604aab9</color>
+    <color name="cell_border">#b450566e</color>
+    <color name="button_background">#dc363735</color>
+</resources>

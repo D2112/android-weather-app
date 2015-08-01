@@ -5,18 +5,43 @@ import android.os.Parcelable;
 
 public class Temperature implements Parcelable {
     private double celsius;
-    private double kelvin;
 
     public Temperature(double celsius) {
         this.celsius = celsius;
     }
 
-    private Temperature(Parcel in) {
-        celsius = in.readInt();
-    }
-
     public double getAsCelsius() {
         return celsius;
+    }
+
+    @Override
+    public String toString() {
+        return "Temperature{" +
+                "celsius=" + celsius +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Temperature that = (Temperature) o;
+
+        return Double.compare(that.celsius, celsius) == 0;
+
+    }
+
+    @Override
+    public int hashCode() {
+        long temp = Double.doubleToLongBits(celsius);
+        return (int) (temp ^ (temp >>> 32));
+    }
+
+    /*----Parcelable stuff----*/
+
+    private Temperature(Parcel in) {
+        celsius = in.readDouble();
     }
 
     @Override
@@ -25,7 +50,7 @@ public class Temperature implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
+    public void writeToParcel(Parcel parcel, int parcelableFlags) {
         parcel.writeDouble(celsius);
     }
 
