@@ -26,10 +26,9 @@ public class SelectingCityActivity extends Activity {
     private WeatherApplication weatherApplication;
     private TextView cityNameInput;
     private MessageOutput messageOutput;
-    private ClientLocation selectedLocation;
-    private ClientLocation clientLocationFromGps;
     private boolean locationServiceBound;
     private LocationService locationService;
+    private ClientLocation clientLocationFromGps = new ClientLocation();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

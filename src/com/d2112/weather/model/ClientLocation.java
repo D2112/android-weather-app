@@ -8,6 +8,9 @@ public class ClientLocation implements Parcelable {
     private Double latitude;
     private Double longitude;
 
+    public ClientLocation() {
+    }
+
     public ClientLocation(Double latitude, String cityName, Double longitude) {
         this.cityName = cityName;
         this.latitude = latitude;
